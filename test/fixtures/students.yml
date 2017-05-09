@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  last_name: MyString
+  first_name: MyString
+  cohort: one
+  specialization: one
+
+two:
+  last_name: MyString
+  first_name: MyString
+  cohort: two
+  specialization: two
