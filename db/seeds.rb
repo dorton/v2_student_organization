@@ -25,15 +25,41 @@ def create_cities
     city.cohorts << cohort
 
     5.times do
-      user = User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
+      user = User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: Faker::Internet.password(8))
       city.users << user
+      cohort.users << user
     end
 
     (15..30).to_a.sample.times do
-      Student.create(last_name: Faker::Name.last_name, first_name: Faker::Name.first_name, cohort_id: cohort.id, specialization_id: Specialization.all.sample.id)
+      student = Student.create(last_name: Faker::Name.last_name, first_name: Faker::Name.first_name, specialization_id: Specialization.all.sample.id)
+      city.students << student
+      cohort.students << student
     end
 
   end
 end
 
 create_cities
+
+def create_me
+  me = User.new
+  me.first_name = "Bob"
+  me.last_name = "Lawblah"
+  me.email = "123@123.com"
+  me.password = "12345678"
+  me.city_id = City.first.id
+  me.save
+  me.cohorts << Cohort.first
+end
+
+create_me
+
+def create_days
+  day = Day.new
+  day.name = Date.today
+  day.cohort_id = Cohort.first.id
+  day.city_id = City.first.id
+  day.save!
+end
+
+create_days

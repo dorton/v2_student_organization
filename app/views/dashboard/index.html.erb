@@ -1,0 +1,13 @@
+<h1><%= @city.name %></h1>
+
+<% @days.each do |day| %>
+
+  <%= link_to day.cohort.start_date, day_path(day.id)%>
+
+  <%=  %>
+
+  <% day.groups.each do |daygroup| %>
+    <%= daygroup.name %>
+  <% end %>
+
+<% end %>
