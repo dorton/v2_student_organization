@@ -1,0 +1,25 @@
+<h1><%= @cohort.start_date %></h1>
+
+
+
+<ul class="collection with-header">
+  <li class="collection-header"><h4>Cohort Days</h4></li>
+  <% @days.each do |day| %>
+    <li class="collection-item"><%= link_to day.name, cohort_day_path(@cohort.id, day.id), class: "btn btn-primary" %></li>
+  <% end %>
+</ul>
+
+
+<h3>Create a new day</h3>
+
+<%= simple_form_for([@cohort, @cohort.days.build]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

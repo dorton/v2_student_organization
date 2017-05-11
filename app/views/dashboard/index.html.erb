@@ -2,7 +2,7 @@
 
 <% @days.each do |day| %>
 
-  <%= link_to day.cohort.start_date, day_path(day.id)%>
+  <%= link_to day.cohort.start_date, cohort_day_path(day.cohort.id, day.id)%>
 
   <%=  %>
 

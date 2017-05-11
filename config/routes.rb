@@ -1,10 +1,19 @@
 Rails.application.routes.draw do
 
+
+
   get 'dashboard/index'
 
   resources :cities
 
-  resources :days
+
+
+  resources :cohorts do
+    resources :days do
+      resources :groups
+    end
+  end
+
 
   root 'dashboard#index'
 
