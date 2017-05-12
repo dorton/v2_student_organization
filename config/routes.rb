@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  post 'groups/:group_id/students/:student_id/update', to: 'days#add_student_to_group', as: 'add_student_to_group'
 
   get 'dashboard/index'
 

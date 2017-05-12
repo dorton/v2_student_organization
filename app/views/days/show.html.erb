@@ -7,8 +7,8 @@
         <div class="row">
         <% @day.groups.each do |daygroup| %>
           <div class="col s12 m6">
-            <div class="card" id="group-<%= daygroup.id %>">
-              <div class="card-content droppable">
+            <div class="card group droppable" id="<%= daygroup.id %>" data-id="<%= daygroup.id %>">
+              <div class="card-content">
                 <span class="card-title"><%= daygroup.name %></span>
 
                   <ul class="collection ">
@@ -16,7 +16,7 @@
                       <li class="collection-item"><%= student.name %></li>
                     <% end %>
                   </ul>
-                
+
               </div>
               <div class="card-action">
                 <%= daygroup.user.name %>
@@ -38,6 +38,10 @@
               <%= f.error_notification %>
               <div class="form-inputs">
                 <%= f.input :name %>
+                <%= f.association :user, collection: @users, prompt: "Choose a Facilitator" %>
+                <%= f.input :start_time %>
+                <%= f.input :end_time %>
+                <%= f.input :review %>
               </div>
               <div class="form-actions">
                 <%= f.button :submit %>
@@ -51,7 +55,7 @@
       <ul class="collection with-header">
         <li class="collection-header"><h4><%= @day.cohort.start_date %> Cohort <%= @day.cohort.students.count %> Students</h4></li>
         <% @day.cohort.students.each do |student| %>
-            <%= content_tag 'div', class: 'collection-item draggable', id: "draggable-#{student.id}", data: {id: "#{student.id}"} do %>
+            <%= content_tag 'div', class: 'collection-item draggable', id: "#{student.id}", data: {id: "#{student.id}"} do %>
                 <li><%= student.name %></li>
             <% end %>
           <% end %>
