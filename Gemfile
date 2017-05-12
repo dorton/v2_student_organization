@@ -31,6 +31,7 @@ gem 'pry-rails', :group => :development
 gem 'faker'
 gem 'jquery-ui-rails'
 gem 'materialize-sass'
+gem 'touchpunch-rails'
 #gem 'refile', github: 'refile/refile', require: 'refile/rails'
 #gem 'refile-mini_magick', github: 'refile/refile-mini_magick'
 #gem 'sinatra', github: 'sinatra/sinatra', branch: 'master'

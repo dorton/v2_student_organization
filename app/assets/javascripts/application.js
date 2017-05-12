@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery-ui
 //= require materialize-sprockets
+//= jquery.ui.touch-punch
 //= require_tree .
