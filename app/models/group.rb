@@ -1,5 +1,7 @@
 class Group < ApplicationRecord
   belongs_to :day
-  has_many :students
   belongs_to :user
+  has_many :students, through: :student_groups
+  has_many :student_groups
+
 end
