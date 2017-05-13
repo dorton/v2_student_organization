@@ -4,4 +4,6 @@ class Cohort < ApplicationRecord
   has_many :days
   has_many :users, through: :user_cohorts
   has_many :user_cohorts
+
+  validates :start_date, :end_date, presence: true
 end
