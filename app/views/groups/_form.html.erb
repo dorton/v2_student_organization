@@ -6,7 +6,22 @@
     <%= f.association :user, collection: @cohort.users, prompt: "Choose a Facilitator" %>
     <%= f.input :start_time, as: :time, html5: true %>
     <%= f.input :end_time, as: :time, html5: true %>
-    <%= f.input :review %>
+    <div class="row">
+      <div class="col s4">
+        <%= f.input :review %>
+      </div>
+      <div class="col s4">
+        <%= f.input :one_on_one %>
+      </div>
+      <div class="col s4">
+        <%= f.input :ai_session %>
+      </div>
+    </div>
+    <div class="input-field">
+      <%= f.input :description, as: :text, html: { id: 'textarea' } %>
+    </div>
+
+
   </div>
   <div class="form-actions">
     <%= f.button :submit %>
