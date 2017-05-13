@@ -3,6 +3,10 @@
 <div class="row">
   <div class="col s8">
 
+    <% @day.groups.group_by(&:start_time).each do |time, daygroup| %>
+        <%= "#{time}" %> ----> <%= daygroup.map(&:name).join(', ') %>
+    <% end %>
+
     <% if @day.groups.present? %>
         <div class="row">
         <% @day.groups.each do |daygroup| %>
@@ -13,7 +17,7 @@
 
                   <ul class="collection ">
                     <% daygroup.students.each do |student| %>
-                      <li class="collection-item"><%= student.name %></li>
+                      <li class="collection-item removestudent" id="<%= student.id %>" data-id="<%= student.id %>"><%= student.name %></li>
                     <% end %>
                   </ul>
 
@@ -39,8 +43,8 @@
               <div class="form-inputs">
                 <%= f.input :name %>
                 <%= f.association :user, collection: @users, prompt: "Choose a Facilitator" %>
-                <%= f.input :start_time %>
-                <%= f.input :end_time %>
+                <%= f.input :start_time, as: :time, html5: true %>
+                <%= f.input :end_time, as: :time, html5: true %>
                 <%= f.input :review %>
               </div>
               <div class="form-actions">

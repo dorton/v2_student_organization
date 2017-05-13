@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
 
   post 'groups/:group_id/students/:student_id/update', to: 'days#add_student_to_group', as: 'add_student_to_group'
+  post 'groups/:group_id/students/:student_id/remove', to: 'days#remove_student_from_group', as: 'remove_student_from_group'
+
 
   get 'dashboard/index'
 

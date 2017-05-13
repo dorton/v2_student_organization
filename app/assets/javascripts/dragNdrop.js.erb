@@ -7,6 +7,7 @@ $(document).on('turbolinks:load', function() {
     zIndex: 100,
     scroll: true
   });
+
   $( ".droppable" ).droppable({
     drop: function( event, ui ) {
       $( this )
@@ -14,6 +15,20 @@ $(document).on('turbolinks:load', function() {
           .append( '<li class="collection-item">'+ ui.draggable.text()  +'</li>' );
       return $.post('/groups/' + this.id + '/students/' + ui.draggable.data('id') + '/update');
     }
-
   });
+
+    $( ".removestudent" ).draggable({
+      revert: "invalid",
+      cursor: 'move',
+      stack: "div",
+      zIndex: 100,
+      scroll: true,
+      stop: function( event, ui ) {
+        $( this );
+        return $.post('/groups/' + $(this).parents('.group').data('id') + '/students/' + this.id + '/remove');
+        $(this).remove()
+    }
+
+    });
+
 });

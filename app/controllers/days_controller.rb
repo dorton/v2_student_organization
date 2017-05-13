@@ -7,6 +7,7 @@ class DaysController < ApplicationController
     @day = Day.find(params[:id])
     @cohort = @day.cohort
     @users = @cohort.users
+
   end
 
 
@@ -46,13 +47,16 @@ class DaysController < ApplicationController
   def add_student_to_group
     @group = Group.find(params[:group_id])
     @student = Student.find(params[:student_id])
-
-
-
     @group.students << @student
-
-
     head :no_content
+  end
+
+  def remove_student_from_group
+    @group = Group.find(params[:group_id])
+    @student = Student.find(params[:student_id])
+
+    @group.students.delete(@student)
+
   end
 
 
