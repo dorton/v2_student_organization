@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513182047) do
+ActiveRecord::Schema.define(version: 20170513191237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20170513182047) do
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.integer  "day_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "user_id"
     t.time     "start_time"
     t.time     "end_time"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20170513182047) do
     t.boolean  "one_on_one"
     t.boolean  "ai_session"
     t.integer  "campus_area_id"
+    t.boolean  "add_all_students"
     t.index ["campus_area_id"], name: "index_groups_on_campus_area_id", using: :btree
     t.index ["day_id"], name: "index_groups_on_day_id", using: :btree
     t.index ["user_id"], name: "index_groups_on_user_id", using: :btree
