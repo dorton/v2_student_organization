@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col s12 m6 l6">
+    <h3>Edit Cohort Info</h3>
+
+    <%= render partial: 'form', locals: {cohort: @cohort} %>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col s12">
+  <div class="divider"></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12">
+    <% unless @cohort.students.empty? %>
+      <ul class="collection with-header">
+        <li class="collection-header"><h4>Edit Students in Cohort</h4></li>
+        <% @cohort.students.each do |student| %>
+        <li class="collection-item"><%= student.name %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <h4>Add Students to Cohort</h4>  
+
+    <% end %>
+
+  </div>
+</div>
