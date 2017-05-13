@@ -3,7 +3,7 @@
 <ul class="collection with-header">
   <li class="collection-header"><h4>Cohorts</h4></li>
   <% @cohorts.each do |cohort| %>
-      <li class="collection-item"><%= link_to cohort.start_date, day_path(cohort.days.last.id), class: "btn btn-primary" %></li>
+      <li class="collection-item"><%= link_to cohort.start_date, cohort_day_path(cohort.id, cohort.days.last.id), class: "btn btn-primary" %></li>
   <% end %>
 
 </ul>
