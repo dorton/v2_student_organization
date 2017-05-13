@@ -1,0 +1,11 @@
+<h3>Edit Day</h3>
+
+<%= render partial: 'form', locals: {cohort: @cohort, day: @day} %>
+
+<div class="row">
+  <div class="col s12 m6 l6">
+  <%= link_to 'Destroy', cohort_day_path(@cohort, @day),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+  </div>
+</div>

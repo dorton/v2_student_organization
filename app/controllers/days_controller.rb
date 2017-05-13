@@ -41,7 +41,10 @@ class DaysController < ApplicationController
   end
 
   def destroy
-    #code
+    @cohort = Cohort.find(params[:cohort_id])
+
+    @cohort.days.find(params[:id]).destroy
+    redirect_to cohort_path(@cohort), notice: "Demoed!"
   end
 
   def add_student_to_group
@@ -58,6 +61,7 @@ class DaysController < ApplicationController
     @group.students.delete(@student)
 
   end
+
 
 
   private
