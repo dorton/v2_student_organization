@@ -1,0 +1,8 @@
+
+<h2>Edit Group</h2>
+<%= render partial: '/groups/form', locals: {cohort: @cohort, day: @day, group: @group} %>
+<br>
+<%= link_to 'Delete', cohort_day_group_path(@cohort, @day, @group),
+              method: :delete,
+              data: { confirm: 'Are you sure?' },
+              class: 'btn red' %>
