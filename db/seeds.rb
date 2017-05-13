@@ -63,3 +63,12 @@ def create_days
 end
 
 create_days
+
+def create_areas
+  city = City.find_by(name: 'Houston')
+  ['Death Star', 'Main Room', 'Classroom 1', 'Classroom 2', 'Couches', 'Front Chairs', 'Ping Pong'].each do |area|
+    city.campus_areas.create!(name: area)
+  end
+end
+
+create_areas
