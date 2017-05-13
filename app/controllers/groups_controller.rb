@@ -17,6 +17,6 @@ class GroupsController < ApplicationController
     private
 
     def day_params
-      params.require(:group).permit(:name, :user_id)
+      params.require(:group).permit(:name, :user_id, :start_time, :end_time, :description, :review, :activity_level, :one_on_one, :ai_session)
     end
 end
