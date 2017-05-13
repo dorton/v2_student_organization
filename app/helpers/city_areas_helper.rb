@@ -1,0 +1,2 @@
+module CityAreasHelper
+end

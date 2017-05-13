@@ -28,16 +28,25 @@ class CohortsController < ApplicationController
   end
 
   def update
-    #code
+    @cohort = current_user.cohorts.find(params[:id])
+
+    if @cohort.update(cohort_params)
+      redirect_to cohort_path(@cohort), notice: "hizaugh!"
+    else
+      redirect_to cohort_path(@cohort), notice: "oooops!"
+    end
   end
 
   def destroy
-    #code
+    @cohort = current_user.cohorts.find(params[:id])
+
+    @cohort.destroy
+    redirect_to cities_path, notice: "Demoed!"
   end
 
   private
 
   def cohort_params
-    params.require(:cohort).permit(:start_date, :end_date, :course_name, )
+    params.require(:cohort).permit(:start_date, :end_date, :course_name )
   end
 end

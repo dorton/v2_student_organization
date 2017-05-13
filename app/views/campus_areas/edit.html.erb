@@ -1,0 +1,15 @@
+<h3>Edit Area</h3>
+<div class="row">
+  <div class="col s12 m6 l6">
+    <%= render partial: 'form', locals: {city: current_user.city, campus_area: @campus_area}  %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12 m6 l6">
+  <%= link_to 'Destroy', city_campus_area_path(current_user.city, @campus_area),
+              method: :delete,
+              data: { confirm: 'Are you sure?' },
+              class: "btn red" %>
+  </div>
+</div>

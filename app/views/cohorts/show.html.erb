@@ -1,11 +1,11 @@
-<h1><%= @cohort.start_date %></h1>
+<h1>Cohort Start Date <%= @cohort.start_date.strftime('%m/%d/%Y') %></h1>
 
 
 
 <ul class="collection with-header">
   <li class="collection-header"><h4>Cohort Days</h4></li>
   <% @days.each do |day| %>
-    <li class="collection-item"><%= link_to day.name, cohort_day_path(@cohort.id, day.id), class: "btn btn-primary" %>  <%= link_to "Delete", cohort_day_path(@cohort, day), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn materialize-red right" %> <%= link_to "Edit", edit_cohort_day_path(@cohort, day), class: "btn right" %></li>
+    <li class="collection-item"><%= link_to day.name.strftime('%a, %e %b %Y'), cohort_day_path(@cohort.id, day.id), class: "btn btn-primary" %>  <%= link_to "Delete", cohort_day_path(@cohort, day), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn materialize-red right" %> <%= link_to "Edit", edit_cohort_day_path(@cohort, day), class: "btn right" %></li>
   <% end %>
 </ul>
 

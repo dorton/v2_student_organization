@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513044514) do
+ActiveRecord::Schema.define(version: 20170513182047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,8 @@ ActiveRecord::Schema.define(version: 20170513044514) do
     t.integer  "activity_level"
     t.boolean  "one_on_one"
     t.boolean  "ai_session"
+    t.integer  "campus_area_id"
+    t.index ["campus_area_id"], name: "index_groups_on_campus_area_id", using: :btree
     t.index ["day_id"], name: "index_groups_on_day_id", using: :btree
     t.index ["user_id"], name: "index_groups_on_user_id", using: :btree
   end
@@ -130,6 +132,7 @@ ActiveRecord::Schema.define(version: 20170513044514) do
   add_foreign_key "cohorts", "cities"
   add_foreign_key "days", "cities"
   add_foreign_key "days", "cohorts"
+  add_foreign_key "groups", "campus_areas"
   add_foreign_key "groups", "days"
   add_foreign_key "groups", "users"
   add_foreign_key "student_groups", "groups"

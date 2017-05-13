@@ -1,9 +1,9 @@
-<h1><%= @city.name %> - Today is <%= Date.today %></h1>
+<h1><%= link_to @city.name, city_path(@city) %> - Today is <%= Date.today.strftime('%m/%d/%Y') %></h1>
 
 <div class="row">
     <% @days.each do |day| %>
     <div class="col s12 m6 l6">
-      <%= link_to "Cohort Name: #{day.cohort.start_date}", cohort_day_path(day.cohort.id, day.id)%>
+      <h3><%= link_to "Cohort Name: #{day.cohort.start_date}", cohort_day_path(day.cohort.id, day.id)%></h3>
         <% day.groups.each do |daygroup| %>
           <div class="row">
             <div class="col s12 m12 l10">

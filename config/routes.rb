@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   get 'dashboard/index'
 
-  resources :cities
+  resources :cities do
+    resources :campus_areas
+  end
 
 
 

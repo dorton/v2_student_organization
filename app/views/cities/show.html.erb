@@ -1,0 +1,27 @@
+<h1><%= current_user.city.name %></h1>
+
+<ul class="collection with-header">
+  <li class="collection-header"><h4>Cohorts</h4></li>
+  <% @cohorts.each do |cohort| %>
+      <li class="collection-item"><%= link_to cohort.start_date, cohort_path(cohort), class: "btn btn-primary" %></li>
+  <% end %>
+  <li class="collection-item"><%= link_to "New Cohort", new_cohort_path, class: "btn btn-primary" %></li>
+
+</ul>
+
+<ul class="collection with-header">
+  <li class="collection-header"><h4><%= current_user.city.name %> Staff</h4></li>
+  <% @staff.each do |user| %>
+  <li class="collection-item"><%= link_to user.name, '#' %></li>
+  <% end %>
+  <li class="collection-item"><%= link_to "Create Staff", '#', class: "btn" %></li>
+</ul>
+
+
+<ul class="collection with-header">
+  <li class="collection-header"><h4><%= current_user.city.name %> Areas</h4></li>
+  <% @areas.each do |area| %>
+  <li class="collection-item"><%= link_to area.name, edit_city_campus_area_path(current_user.city, area) %></li>
+  <% end %>
+  <li class="collection-item"><%= link_to "Create Area", new_city_campus_area_path(current_user.city), class: "btn" %></li>
+</ul>
