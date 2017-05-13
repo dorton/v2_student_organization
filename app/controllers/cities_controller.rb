@@ -1,6 +1,7 @@
 class CitiesController < ApplicationController
   def index
-    @user = current_user
-    @cohorts = @user.city.cohorts.all
+
+    @cohorts = current_user.cohorts.all
+    @staff = current_user.city.users.all
   end
 end

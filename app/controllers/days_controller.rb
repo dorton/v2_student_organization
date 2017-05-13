@@ -12,12 +12,12 @@ class DaysController < ApplicationController
 
 
   def new
-    @cohort = Cohort.find(params[:cohort_id])
+    @cohort = current_user.cohorts.find(params[:cohort_id])
     @day = @cohort.days.new
   end
 
   def edit
-    @cohort = Cohort.find(params[:cohort_id])
+    @cohort = current_user.cohorts.find(params[:cohort_id])
     @day = @cohort.days.find(params[:id])
   end
 
@@ -34,14 +34,14 @@ class DaysController < ApplicationController
   end
 
   def update
-    @cohort = Cohort.find(params[:cohort_id])
+    @cohort = current_user.cohorts.find(params[:cohort_id])
     @day = @cohort.days.find(params[:id])
 
     @day.update(day_params)
   end
 
   def destroy
-    @cohort = Cohort.find(params[:cohort_id])
+    @cohort = current_user.cohorts.find(params[:cohort_id])
 
     @cohort.days.find(params[:id]).destroy
     redirect_to cohort_path(@cohort), notice: "Demoed!"
