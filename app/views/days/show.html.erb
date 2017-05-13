@@ -3,15 +3,15 @@
 <div class="row">
   <div class="col s8">
 
-    <% @day.groups.group_by(&:start_time).each do |time, daygroup| %>
-        <%= "#{time}" %> ----> <%= daygroup.map(&:name).join(', ') %>
-    <% end %>
+    <% @day.groups.group_by(&:start_time).each do |time, daygroups| %>
+        <h4><%= time.strftime('%I:%M') %></h4>
 
-    <% if @day.groups.present? %>
+
+
         <div class="row">
-        <% @day.groups.each do |daygroup| %>
+        <% daygroups.each do |daygroup| %>
           <div class="col s12 m6">
-            <div class="card group droppable" id="<%= daygroup.id %>" data-id="<%= daygroup.id %>">
+            <div class="card group droppable sticky-action" id="<%= daygroup.id %>" data-id="<%= daygroup.id %>">
               <div class="card-content">
                 <span class="card-title"><%= daygroup.name %></span>
 
@@ -22,24 +22,24 @@
                   </ul>
 
               </div>
-              <div class="card-action">
-                <div class="row">
-                  <div class="col s12 m6 l6">
-                  <%= daygroup.user.name %>
-                  </div>
-                  <div class="col s12 m6 l6">
-                  <%= link_to "Edit Group", edit_cohort_day_group_path(@cohort.id, @day.id, daygroup.id), class: "btn btn-primary" %>
-                  </div>
-                </div>
 
+
+
+              <div class="card-action">
+                  <%= daygroup.user.name %>
+                  <%= link_to "Edit Group", edit_cohort_day_group_path(@cohort.id, @day.id, daygroup.id), class: "btn btn-primary" %>
               </div>
+
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+              </div>
+
             </div>
           </div>
         <% end %>
         </div>
-    <% else %>
-
-    <% end %>
+      <% end %>
 
 
       <ul class="collapsible" data-collapsible="accordion">

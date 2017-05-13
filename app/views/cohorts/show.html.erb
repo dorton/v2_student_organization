@@ -12,14 +12,4 @@
 
 <h3>Create a new day</h3>
 
-<%= simple_form_for([@cohort, @cohort.days.build]) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :name %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+<%= render partial: 'days/form', locals: { cohort: @cohort, day: @cohort.days.build } %>
