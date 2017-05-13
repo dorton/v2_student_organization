@@ -8,13 +8,10 @@ Here's the current data layout for this:
 
 ### Overall
 
-- The UI/entire front end on this pig.
 - Slack API stuff.
-- Ensure that the data structure makes sense
 
 ### Users
 
-- Add auth
 - Add roles
 
 ### Students
@@ -24,4 +21,10 @@ Here's the current data layout for this:
 
 ### Days
 
-- Auto create weekdays during a cohort 
+- Auto create weekdays during a cohort
+
+### Groups
+
+- Fix the jankieness of moving students into and out of groups
+- Delete the student element when dragging from a group
+- Fix the z-value of the divs that are moving somehow.
