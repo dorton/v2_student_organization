@@ -34,6 +34,10 @@
       </ul>
     <% else %>
       <h4>Add Students to Cohort</h4>
+      <%= form_tag import_cohort_students_path(@cohort), multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= submit_tag "Import CSV" %>
+      <% end %>
 
     <% end %>
 

@@ -13,7 +13,11 @@ Rails.application.routes.draw do
 
 
 
+
   resources :cohorts do
+    resources :students do
+      collection {post :import}
+    end
     resources :days do
       resources :groups
     end
