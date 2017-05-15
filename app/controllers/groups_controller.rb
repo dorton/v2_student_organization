@@ -36,6 +36,11 @@ class GroupsController < ApplicationController
     @group = @day.groups.find(params[:id])
 
     if @group.update(group_params)
+      if @group.add_all_students?
+        @group.students.each do |student|
+          @group.students << student unless @group.students.includes student
+        end
+      end
       redirect_to cohort_day_path(@cohort, @day), notice: "hizaugh!"
     else
       redirect_to cohort_day_path(@cohort, @day), notice: "oooops!"
