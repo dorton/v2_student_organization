@@ -27,6 +27,7 @@ class DaysController < ApplicationController
     @day.city_id = @cohort.city.id
 
     if @day.save!
+      @day.update_attributes(week_number: @day.name.cweek)
       redirect_to @cohort, notice: 'Day Created.'
     else
       render @cohort, notice: 'oooops.'
@@ -50,7 +51,7 @@ class DaysController < ApplicationController
   def add_student_to_group
     @group = Group.find(params[:group_id])
     @student = Student.find(params[:student_id])
-    @group.students << @student
+    @group.students << @student unless @group.students.include?(@student)
     head :no_content
   end
 
