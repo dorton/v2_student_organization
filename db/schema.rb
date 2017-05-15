@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170514014949) do
+ActiveRecord::Schema.define(version: 20170515021240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,8 @@ ActiveRecord::Schema.define(version: 20170514014949) do
     t.datetime "updated_at",        null: false
     t.integer  "group_id"
     t.integer  "city_id"
+    t.string   "email"
+    t.string   "slack_username"
     t.index ["city_id"], name: "index_students_on_city_id", using: :btree
     t.index ["cohort_id"], name: "index_students_on_cohort_id", using: :btree
     t.index ["group_id"], name: "index_students_on_group_id", using: :btree
