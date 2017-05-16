@@ -1,0 +1,7 @@
+<h3>Create a New Student for <%= @cohort.start_date.strftime('%B %Y') %> Cohort</h3>
+
+<div class="row">
+  <div class="col s12 m6 l6">
+    <%= render partial: 'form', locals: {cohort: @cohort, student: @student} %>
+  </div>
+</div>

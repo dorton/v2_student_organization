@@ -1,0 +1,16 @@
+<h3>Edit <%= @student.name %>, in the <%= @cohort.start_date.strftime('%B %Y') %> Cohort</h3>
+
+<div class="row">
+  <div class="col s12 m6 l6">
+    <%= render partial: 'form', locals: {cohort: @cohort, student: @student} %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12 m6 l6">
+  <%= link_to 'Destroy', cohort_student_path(@cohort, @student),
+              method: :delete,
+              data: { confirm: 'Are you sure?' },
+              class: 'btn red' %>
+  </div>
+</div>

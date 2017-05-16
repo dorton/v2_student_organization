@@ -8,7 +8,7 @@
 
 <div class="row">
   <div class="col s12 m6 l6">
-  <%= link_to "Delete #{@cohort.start_date}", cohort_path(@cohort),
+  <%= link_to "Delete #{@cohort.start_date.strftime('%B %Y')}", cohort_path(@cohort),
               method: :delete,
               data: { confirm: 'Are you sure?' },
               class: 'btn red' %>
@@ -29,17 +29,19 @@
       <ul class="collection with-header">
         <li class="collection-header"><h4>Edit Students in Cohort</h4></li>
         <% @cohort.students.each do |student| %>
-        <li class="collection-item"><%= student.name %></li>
+        <li class="collection-item"><%= link_to student.name, edit_cohort_student_path(@cohort, student) %></li>
         <% end %>
       </ul>
     <% else %>
-      <h4>Add Students to Cohort</h4>
+      <h4>Import Students to Cohort</h4>
       <%= form_tag import_cohort_students_path(@cohort), multipart: true do %>
         <%= file_field_tag :file %>
         <%= submit_tag "Import CSV" %>
       <% end %>
 
     <% end %>
+
+    <%= link_to "Add A Student", new_cohort_student_path(@cohort), class: "btn" %>
 
   </div>
 </div>

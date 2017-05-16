@@ -4,7 +4,9 @@ class Student < ApplicationRecord
   belongs_to :cohort
   belongs_to :city
   has_many :groups, through: :student_groups
-  has_many :student_groups
+  has_many :student_groups, dependent: :destroy
+
+  validates :email, uniqueness: true
 
 
   def self.import(file, cohort, city)
