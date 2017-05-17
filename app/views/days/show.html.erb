@@ -13,26 +13,48 @@
           <div class="col s12 m6">
             <div class="card group droppable sticky-action" id="<%= daygroup.id %>" data-id="<%= daygroup.id %>">
               <div class="card-content">
-                <span class="card-title"><%= daygroup.name %></span>
+                <span class="card-title activator grey-text text-darken-4"><%= daygroup.name %><i class="material-icons right">more_vert</i></span>
+                <p>Facilitator: <%= daygroup.user.name %></p>
+                <p>Location: <%= daygroup.campus_area.name %></p>
+                <p><%= daygroup.start_time.strftime('%I:%M') %><%= " - #{daygroup.end_time.strftime('%I:%M')}" if daygroup.end_time.present? %></p>
 
-                  <ul class="collection ">
-                    <% daygroup.students.order(:last_name).each do |student| %>
-                      <li class="collection-item removestudent" id="<%= student.id %>" data-id="<%= student.id %>"><%= student.name %></li>
-                    <% end %>
+                  <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                      <div class="collapsible-header"><i class="material-icons">filter_drama</i><%= daygroup.students.count %> Students</div>
+                      <div class="collapsible-body">
+                        <span>
+                          <ul class="collection ">
+                            <% daygroup.students.order(:last_name).each do |student| %>
+                              <li class="collection-item removestudent" id="<%= student.id %>" data-id="<%= student.id %>"><%= student.name %></li>
+                            <% end %>
+                          </ul>
+                        </span>
+                      </div>
+                    </li>
                   </ul>
+
+
+
+
+                    <p><%= '<div class="chip">Review Session</div>'.html_safe if daygroup.review %></p>
+                    <p><%= '<div class="chip">1 on 1 Session</div>'.html_safe if daygroup.one_on_one %></p>
+                    <p><%= '<div class="chip">AI Session</div>'.html_safe if daygroup.ai_session %></p>
+                    <p><%= '<div class="chip">Whole Group Session</div>'.html_safe if daygroup.add_all_students %></p>
+
+
+
 
               </div>
 
 
 
               <div class="card-action">
-                  <%= daygroup.user.name %>
-                  <%= link_to "Edit Group", edit_cohort_day_group_path(@cohort.id, @day.id, daygroup.id), class: "btn btn-primary" %>
+                  <%= link_to "Edit Group", edit_cohort_day_group_path(@cohort.id, @day.id, daygroup.id) %>
               </div>
 
               <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                <span class="card-title grey-text text-darken-4"><%= daygroup.name %><i class="material-icons right">close</i></span>
+                <p><%= daygroup.description %></p>
               </div>
 
             </div>
@@ -70,5 +92,9 @@
 <div class="row">
   <div class="col s12 m6 l6">
     <%= link_to "Back to cohort days", cohort_path(@cohort), class: "btn btn-primary" %>
+  </div>
+  <div class="col s12 m6 l6">
+    <%= link_to "Send to Slack", slack_path(@day), method: :post, data: { confirm: 'Are you sure?' }, class: "btn green #{'disabled' if @day.slack_sent}" %>
+
   </div>
 </div>

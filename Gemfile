@@ -37,6 +37,9 @@ gem 'touchpunch-rails'
 #gem 'sinatra', github: 'sinatra/sinatra', branch: 'master'
 #gem 'refile-postgres'
 gem 'dynamic_form'
+gem 'slack-ruby-client'
+gem 'eventmachine'
+gem 'faye-websocket'
 
 
 # Use jquery as the JavaScript library

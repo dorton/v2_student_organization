@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170515021240) do
+ActiveRecord::Schema.define(version: 20170517144832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,10 +42,11 @@ ActiveRecord::Schema.define(version: 20170515021240) do
   create_table "days", force: :cascade do |t|
     t.date     "name"
     t.integer  "cohort_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "city_id"
     t.integer  "week_number"
+    t.boolean  "slack_sent",  default: false, null: false
     t.index ["city_id"], name: "index_days_on_city_id", using: :btree
     t.index ["cohort_id"], name: "index_days_on_cohort_id", using: :btree
   end
