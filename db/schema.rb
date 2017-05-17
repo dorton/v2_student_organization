@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170517144832) do
+ActiveRecord::Schema.define(version: 20170517151510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20170517144832) do
     t.boolean  "ai_session"
     t.integer  "campus_area_id"
     t.boolean  "add_all_students"
+    t.integer  "rigor_score"
     t.index ["campus_area_id"], name: "index_groups_on_campus_area_id", using: :btree
     t.index ["day_id"], name: "index_groups_on_day_id", using: :btree
     t.index ["user_id"], name: "index_groups_on_user_id", using: :btree
