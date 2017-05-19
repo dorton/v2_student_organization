@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+
   post 'groups/:group_id/students/:student_id/update', to: 'days#add_student_to_group', as: 'add_student_to_group'
   post 'groups/:group_id/students/:student_id/remove', to: 'days#remove_student_from_group', as: 'remove_student_from_group'
 
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
   get 'dashboard/index'
 
   resources :cities do
+    resources :users
     resources :campus_areas
   end
 
@@ -30,6 +32,10 @@ Rails.application.routes.draw do
 
 
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations"}
+    as :user do
+      get '/' => 'devise/registrations#new'
+    end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

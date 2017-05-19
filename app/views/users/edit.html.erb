@@ -1,0 +1,16 @@
+<h1><%= @user.name %></h1>
+
+<div class="row">
+  <div class="col s12 m6 l6">
+  <%= render 'form' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12 m6 l6">
+  <%= link_to 'Destroy', city_user_path(@city, @user),
+              method: :delete,
+              class: "btn red",
+              data: { confirm: 'Are you sure?' } %>
+  </div>
+</div>
