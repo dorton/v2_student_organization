@@ -20,11 +20,26 @@
       <div class="col s3">
         <%= f.input :add_all_students %>
       </div>
+      <div class="col s3">
+        <%= f.input :advancement %>
+      </div>
+      <div class="col s3">
+        <%= f.input :remediation %>
+      </div>
     </div>
     <div class="input-field">
       <%= f.input :description, as: :text, html: { id: 'textarea' } %>
     </div>
   </div>
+
+
+  <div class="row">
+    <div class="col s12 m6 l6 range-field">
+      <%= f.input :rigor_score, as: :range, input_html: {id: "test5", min: "0", max: "10"} %>
+    </div>
+  </div>
+
+
   <div class="row">
     <div class="col s12 m6 l6">
       <%= f.association :students, collection: @cohort.students.order(:last_name) %>
