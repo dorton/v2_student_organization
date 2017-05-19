@@ -42,7 +42,7 @@
 
   <div class="row">
     <div class="col s12 m6 l6">
-      <%= f.association :students, collection: @cohort.students.order(:last_name) %>
+      <%= f.association :students, collection: @cohort.students.order(:last_name), prompt: "Add Students to Group" %>
     </div>
   </div>
   <div class="form-actions">
