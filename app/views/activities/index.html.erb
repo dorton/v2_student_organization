@@ -10,7 +10,7 @@
   </thead>
 
   <tbody>
-    <% @activities.each do |activity| %>
+    <% @activities.order(:name).each do |activity| %>
       <tr>
         <td><%= activity.name %></td>
         <td><%= activity.description %></td>
