@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170517214335) do
+ActiveRecord::Schema.define(version: 20170520012818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "day_id"
+    t.index ["day_id"], name: "index_activities_on_day_id", using: :btree
+  end
 
   create_table "campus_areas", force: :cascade do |t|
     t.string   "name"
@@ -136,6 +145,7 @@ ActiveRecord::Schema.define(version: 20170517214335) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "activities", "days"
   add_foreign_key "campus_areas", "cities"
   add_foreign_key "cohorts", "cities"
   add_foreign_key "days", "cities"

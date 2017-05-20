@@ -17,7 +17,7 @@ end
 create_specializations
 
 def create_cities
-  campuses = ["Houston", "Austin", "Dallas"]
+  campuses = ["Houston"]
 
   campuses.each do |campus|
     city = City.create(name: campus)
@@ -30,8 +30,8 @@ def create_cities
       cohort.users << user
     end
 
-    (15..30).to_a.sample.times do
-      student = Student.create(last_name: Faker::Name.last_name, first_name: Faker::Name.first_name, specialization_id: Specialization.all.sample.id)
+    25.times do
+      student = Student.create(last_name: Faker::Name.last_name, first_name: Faker::Name.first_name, specialization_id: Specialization.all.sample.id, email: Faker::Internet.email)
       city.students << student
       cohort.students << student
     end
