@@ -5,9 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   belongs_to :city
   has_many :groups, through: :user_groups
-  has_many :user_groups
+  has_many :user_groups, dependent: :destroy
   has_many :cohorts, through: :user_cohorts
-  has_many :user_cohorts
+  has_many :user_cohorts, dependent: :destroy
 
   def name
     "#{first_name} #{last_name}"
