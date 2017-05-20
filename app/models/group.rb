@@ -5,11 +5,12 @@ class Group < ApplicationRecord
   belongs_to :campus_area
   has_many :students, through: :student_groups
   has_many :student_groups, dependent: :destroy
-  has_many :activities
+  has_many :activities, through: :group_tivities
+  has_many :group_tivities, dependent: :destroy
 
   amoeba do
     enable
-    clone [:student_groups, :user_groups]
+    clone [:student_groups, :user_groups, :group_tivities]
   end
 
 end

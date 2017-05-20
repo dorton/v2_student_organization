@@ -3,7 +3,7 @@
   <%= f.error_notification %>
   <div class="form-inputs">
     <%# f.input :name %>
-    <%= f.association :activities, label: "Activity Name" %>
+    <%= f.association :activities, collection: day.activities.all.order(:name), prompt: "Choose an activity for the group", label: "Activity Name" %>
     <%= f.association :users, collection: @cohort.users, prompt: "Choose a Facilitator" %>
     <%= f.association :campus_area, collection: current_user.city.campus_areas.all, prompt: "Where will this group be?" %>
     <%= f.input :start_time, as: :time, html5: true %>

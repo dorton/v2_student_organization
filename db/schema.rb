@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170520030751) do
+ActiveRecord::Schema.define(version: 20170520041239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,10 +18,11 @@ ActiveRecord::Schema.define(version: 20170520030751) do
   create_table "activities", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "day_id"
     t.integer  "group_id"
+    t.boolean  "everyday",    default: false, null: false
     t.index ["day_id"], name: "index_activities_on_day_id", using: :btree
     t.index ["group_id"], name: "index_activities_on_group_id", using: :btree
   end
@@ -69,6 +70,15 @@ ActiveRecord::Schema.define(version: 20170520030751) do
     t.boolean  "slack_sent",  default: false, null: false
     t.index ["city_id"], name: "index_days_on_city_id", using: :btree
     t.index ["cohort_id"], name: "index_days_on_cohort_id", using: :btree
+  end
+
+  create_table "group_tivities", force: :cascade do |t|
+    t.integer  "group_id"
+    t.integer  "activity_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["activity_id"], name: "index_group_tivities_on_activity_id", using: :btree
+    t.index ["group_id"], name: "index_group_tivities_on_group_id", using: :btree
   end
 
   create_table "groups", force: :cascade do |t|
@@ -173,6 +183,8 @@ ActiveRecord::Schema.define(version: 20170520030751) do
   add_foreign_key "day_tivities", "days"
   add_foreign_key "days", "cities"
   add_foreign_key "days", "cohorts"
+  add_foreign_key "group_tivities", "activities"
+  add_foreign_key "group_tivities", "groups"
   add_foreign_key "groups", "campus_areas"
   add_foreign_key "groups", "days"
   add_foreign_key "groups", "users"

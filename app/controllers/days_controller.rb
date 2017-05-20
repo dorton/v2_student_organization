@@ -1,4 +1,5 @@
 class DaysController < ApplicationController
+  before_action :hide_everyday_activities, only: [:edit, :new]
 
   require 'net/https'
   require 'open-uri'
@@ -32,6 +33,7 @@ class DaysController < ApplicationController
 
     if @day.save!
       @day.update_attributes(week_number: @day.name.cweek)
+      @day.activities << Activity.where(everyday: true)
       redirect_to @cohort, notice: 'Day Created.'
     else
       render @cohort, notice: 'oooops.'
@@ -119,5 +121,9 @@ class DaysController < ApplicationController
 
   def day_params
     params.require(:day).permit(:name, activity_ids: [])
+  end
+
+  def hide_everyday_activities
+    @activities = Activity.where(everyday: false).order(:name)
   end
 end
