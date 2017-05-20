@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :campus_areas
   end
 
-
+  resources :activities
 
 
   resources :cohorts do

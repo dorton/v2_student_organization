@@ -2,6 +2,7 @@ class Day < ApplicationRecord
   belongs_to :cohort
   has_many :groups, dependent: :destroy
   belongs_to :city
-  has_many :activities
+  has_many :activities, through: :day_tivities
+  has_many :day_tivities
   validates :name, presence: true
 end

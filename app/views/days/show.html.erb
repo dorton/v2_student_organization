@@ -13,8 +13,8 @@
           <div class="col s12 m6">
             <div class="card group droppable sticky-action" id="<%= daygroup.id %>" data-id="<%= daygroup.id %>">
               <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4"><%= daygroup.name %><i class="material-icons right">more_vert</i></span>
-                <p>Facilitator: <%= daygroup.user.name %></p>
+                <span class="card-title activator grey-text text-darken-4"><%= daygroup.activities.map(&:name).to_sentence %><i class="material-icons right">more_vert</i></span>
+                <p>Facilitator: <%= daygroup.users.map(&:name).to_sentence %> </p>
                 <p>Location: <%= daygroup.campus_area.name %></p>
                 <p><%= daygroup.start_time.strftime('%I:%M') %><%= " - #{daygroup.end_time.strftime('%I:%M')}" if daygroup.end_time.present? %></p>
                   <ul class="collapsible" data-collapsible="accordion">
@@ -42,7 +42,7 @@
               </div>
               <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4"><%= daygroup.name %><i class="material-icons right">close</i></span>
-                <p><%= daygroup.description %></p>
+                <p><%= daygroup.activities.map(&:description).to_sentence %></p>
               </div>
             </div>
           </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170520012818) do
+ActiveRecord::Schema.define(version: 20170520030751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,9 @@ ActiveRecord::Schema.define(version: 20170520012818) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "day_id"
+    t.integer  "group_id"
     t.index ["day_id"], name: "index_activities_on_day_id", using: :btree
+    t.index ["group_id"], name: "index_activities_on_group_id", using: :btree
   end
 
   create_table "campus_areas", force: :cascade do |t|
@@ -46,6 +48,15 @@ ActiveRecord::Schema.define(version: 20170520012818) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["city_id"], name: "index_cohorts_on_city_id", using: :btree
+  end
+
+  create_table "day_tivities", force: :cascade do |t|
+    t.integer  "day_id"
+    t.integer  "activity_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["activity_id"], name: "index_day_tivities_on_activity_id", using: :btree
+    t.index ["day_id"], name: "index_day_tivities_on_day_id", using: :btree
   end
 
   create_table "days", force: :cascade do |t|
@@ -124,6 +135,15 @@ ActiveRecord::Schema.define(version: 20170520012818) do
     t.index ["user_id"], name: "index_user_cohorts_on_user_id", using: :btree
   end
 
+  create_table "user_groups", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_user_groups_on_group_id", using: :btree
+    t.index ["user_id"], name: "index_user_groups_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "last_name"
     t.string   "first_name"
@@ -146,8 +166,11 @@ ActiveRecord::Schema.define(version: 20170520012818) do
   end
 
   add_foreign_key "activities", "days"
+  add_foreign_key "activities", "groups"
   add_foreign_key "campus_areas", "cities"
   add_foreign_key "cohorts", "cities"
+  add_foreign_key "day_tivities", "activities"
+  add_foreign_key "day_tivities", "days"
   add_foreign_key "days", "cities"
   add_foreign_key "days", "cohorts"
   add_foreign_key "groups", "campus_areas"
@@ -161,5 +184,7 @@ ActiveRecord::Schema.define(version: 20170520012818) do
   add_foreign_key "students", "specializations"
   add_foreign_key "user_cohorts", "cohorts"
   add_foreign_key "user_cohorts", "users"
+  add_foreign_key "user_groups", "groups"
+  add_foreign_key "user_groups", "users"
   add_foreign_key "users", "cities"
 end

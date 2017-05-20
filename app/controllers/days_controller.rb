@@ -42,7 +42,11 @@ class DaysController < ApplicationController
     @cohort = current_user.cohorts.find(params[:cohort_id])
     @day = @cohort.days.find(params[:id])
 
-    @day.update(day_params)
+    if @day.update(day_params)
+      redirect_to @cohort
+    else
+      redirect_to edit_cohort_day_path(@cohort, @day)
+    end
   end
 
   def destroy
@@ -79,7 +83,7 @@ class DaysController < ApplicationController
 
       stu_groups_array = []
       stu_groups.order(:start_time).each do |groupinfo|
-        the_group = "- #{groupinfo.start_time. strftime('%I:%M')} | #{groupinfo.campus_area.name} | #{groupinfo.user.name} | #{groupinfo.description}"
+        the_group = "- #{groupinfo.start_time. strftime('%I:%M')} | #{groupinfo.campus_area.name} | #{groupinfo.users.map(&:name).to_sentence} | #{groupinfo.activities.map(&:name).to_sentence}"
         stu_groups_array << the_group
       end
 
@@ -114,6 +118,6 @@ class DaysController < ApplicationController
   private
 
   def day_params
-    params.require(:day).permit(:name)
+    params.require(:day).permit(:name, activity_ids: [])
   end
 end

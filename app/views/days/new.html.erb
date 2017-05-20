@@ -1,3 +1,13 @@
 <h3>New Day</h3>
 
-<%= render partial: 'form', locals: {cohort: @cohort, day: @day} %>
+<div class="row">
+  <div class="col s12 m6 l6">
+    <%= render partial: 'form', locals: {cohort: @cohort, day: @day} %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12 m6 l6">
+    <%= link_to "Create an Activity", new_activity_path, class: "btn" %>
+  </div>
+</div>
