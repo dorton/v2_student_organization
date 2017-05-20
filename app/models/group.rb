@@ -18,18 +18,22 @@ class Group < ApplicationRecord
     activities = Activity.where(everyday: true)
     activities.each do |activity|
       group = day.groups.new
-      group.add_all_students = true
+
       group.campus_area = CampusArea.find_by(name: "Main Room")
       if activity.name == "Morning Announcements"
         group.start_time = "09:30AM"
+        group.add_all_students = true
       elsif activity.name == "Lecture Review"
         group.start_time = "10:00AM"
       elsif activity.name == "Assessed Project"
         group.start_time = "1:00PM"
+        group.add_all_students = true
       elsif activity.name == "Open Lab"
         group.start_time = "2:00PM"
+        group.add_all_students = true
       elsif activity.name == "AI Assessment and Check In"
         group.start_time = "4:00PM"
+        group.add_all_students = true
       else
         group.start_time = "09:30AM"
       end
