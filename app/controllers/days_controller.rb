@@ -95,9 +95,7 @@ class DaysController < ApplicationController
       text = "Good Morning!
   Here's your schedule for #{@day.name.strftime('%a, %e %b %Y')}:
 
-  #{stu_groups_array.join("\n")}
-
-  3:00 - Instructor Checkin"
+  #{stu_groups_array.join("\n")}"
 
       Slack.configure do |config|
         config.token = token
