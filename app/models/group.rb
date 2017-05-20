@@ -23,7 +23,7 @@ class Group < ApplicationRecord
       if activity.name == "Morning Announcements"
         group.start_time = "09:30AM"
       elsif activity.name == "Lecture Review"
-        group.start_time = "10:30AM"
+        group.start_time = "10:00AM"
       elsif activity.name == "Assessed Project"
         group.start_time = "1:00PM"
       elsif activity.name == "Open Lab"
