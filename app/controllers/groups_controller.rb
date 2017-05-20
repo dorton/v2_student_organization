@@ -30,6 +30,21 @@ class GroupsController < ApplicationController
 
   end
 
+  def copy_group
+    @cohort = Cohort.find(params[:cohort_id])
+    @day = @cohort.days.find(params[:day_id])
+    @group = @day.groups.find(params[:group_id])
+
+    copy = @group.amoeba_dup
+
+    if copy.save!
+      redirect_to edit_cohort_day_group_path(@cohort, @day, copy.id)
+    else
+      redirect_to edit_cohort_day_group_path(@cohort, @day, @group)
+    end
+
+  end
+
   def update
     @cohort = Cohort.find(params[:cohort_id])
     @day = @cohort.days.find(params[:day_id])

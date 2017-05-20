@@ -40,6 +40,7 @@ gem 'dynamic_form'
 gem 'slack-ruby-client'
 gem 'eventmachine'
 gem 'faye-websocket'
+gem 'amoeba'
 
 
 # Use jquery as the JavaScript library

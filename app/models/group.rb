@@ -5,4 +5,9 @@ class Group < ApplicationRecord
   has_many :students, through: :student_groups
   has_many :student_groups, dependent: :destroy
 
+  amoeba do
+    enable
+    clone [:student_groups]
+  end
+
 end

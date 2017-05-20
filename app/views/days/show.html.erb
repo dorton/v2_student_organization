@@ -38,6 +38,7 @@
               </div>
               <div class="card-action">
                   <%= link_to "Edit Group", edit_cohort_day_group_path(@cohort.id, @day.id, daygroup.id) %>
+                  <%= link_to "Duplicate Group", copy_group_path(@cohort.id, @day.id, daygroup.id), method: :post, data: { confirm: 'Are you sure you want to make a copy?' } %>
               </div>
               <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4"><%= daygroup.name %><i class="material-icons right">close</i></span>
