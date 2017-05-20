@@ -28,7 +28,7 @@
     <% unless @cohort.students.empty? %>
       <ul class="collection with-header">
         <li class="collection-header"><h4>Edit Students in Cohort</h4></li>
-        <% @cohort.students.each do |student| %>
+        <% @cohort.students.order(:last_name).each do |student| %>
         <li class="collection-item"><%= link_to student.name, edit_cohort_student_path(@cohort, student) %></li>
         <% end %>
       </ul>
