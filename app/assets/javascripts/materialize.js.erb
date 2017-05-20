@@ -16,8 +16,18 @@ $(document).on('turbolinks:load', function() {
 
   $('.collapsible').collapsible();
 
+  $('.pick_that_time').timepicker({
+    'minTime': '9:00am',
+    'maxTime': '6:00pm',
+  });
 
-
-
+  $('.pick_that_time#start_time').on('changeTime', function() {
+    var d = new Date();
+    var time = ($('#start_time').val()).match(/(\d+)(?::(\d\d))?\s*(p?)/);
+    d.setHours( parseInt(time[1]) + (time[3] ? 12 : 0) );
+    d.setMinutes( parseInt(time[2]) || 0 );
+    newTime = new Date(d.getTime() + 30*60000);
+    $('#end_time').val(newTime.toLocaleString('en-US', { hour: 'numeric',minute:'numeric', hour12: true }))
+  });
 
 });

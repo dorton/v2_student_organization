@@ -6,8 +6,8 @@
     <%= f.association :activities, collection: day.activities.all.order(:name), prompt: "Choose an activity for the group", label: "Activity Name" %>
     <%= f.association :users, collection: @cohort.users, prompt: "Choose a Facilitator" %>
     <%= f.association :campus_area, collection: current_user.city.campus_areas.all, prompt: "Where will this group be?" %>
-    <%= f.input :start_time, as: :time, html5: true %>
-    <%= f.input :end_time, as: :time, html5: true %>
+    <%= f.input :start_time, as: 'string', input_html: { class: 'pick_that_time', id: 'start_time'} %>
+    <%= f.input :end_time, as: 'string', input_html: { class: 'pick_that_time', id: 'end_time'} %>
     <div class="row">
       <div class="col s3">
         <%= f.input :review %>
