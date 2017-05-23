@@ -102,12 +102,19 @@ class DaysController < ApplicationController
         stu_groups_array << the_group
       end
 
+      if stu_groups.where(review: true).count > 1
+      else
+        review_invite = "There will also be #{@day.groups.where(review: true).count} #{'review'.pluralize(@day.groups.where(review: true).count)} today at #{@day.groups.where(review: true).map { |a| a.start_time.strftime('%I:%M')}.join(', ')}, feel free to attend."
+      end
+
       token = ENV['slack_token']
       channel = "@#{student.slack_username}"
       text = "Good Morning!
   Here's your schedule for #{@day.name.strftime('%a, %e %b %Y')}:
 
-  #{stu_groups_array.join("\n")}"
+  #{stu_groups_array.join("\n")}
+
+  #{review_invite}"
 
       Slack.configure do |config|
         config.token = token
