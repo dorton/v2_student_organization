@@ -47,7 +47,7 @@
                 </div>
                 <div class="card-reveal">
                   <span class="card-title grey-text text-darken-4"><%= daygroup.name %><i class="material-icons right">close</i></span>
-                  <p><%= daygroup.activities.map(&:description).to_sentence %></p>
+                  <p><%= daygroup.activities.map(&:name).join("\n") %></p>
                 </div>
               </div>
             </div>

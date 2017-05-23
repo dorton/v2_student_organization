@@ -93,7 +93,12 @@ class DaysController < ApplicationController
 
       stu_groups_array = []
       stu_groups.order(:start_time).each do |groupinfo|
-        the_group = "- #{groupinfo.start_time. strftime('%I:%M')} | #{groupinfo.campus_area.name} | #{groupinfo.users.map(&:name).to_sentence} | #{groupinfo.activities.map(&:name).to_sentence}"
+        if groupinfo.activities.count > 1
+          activity_name = "#{groupinfo.activities.count} Activities"
+        else
+          activity_name = groupinfo.activities.map(&:name).to_sentence
+        end
+        the_group = "- #{groupinfo.start_time. strftime('%I:%M')} | #{groupinfo.campus_area.name} | #{groupinfo.users.map(&:name).to_sentence} | #{activity_name}"
         stu_groups_array << the_group
       end
 
