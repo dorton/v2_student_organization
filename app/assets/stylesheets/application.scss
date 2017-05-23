@@ -4,3 +4,8 @@ $primary-color: color("shield-grey", "base") !default;
 $secondary-color: color("code-blue", "base") !default;
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 @import 'materialize';
+
+
+.ui-state-highlight{
+  background-color: lightgrey !important;
+}

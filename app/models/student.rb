@@ -23,5 +23,17 @@ class Student < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def self.unassigned(students, groups, activities)
+    unassigned_students = []
+
+    groups.each do |group|
+      un_students = students.where('students.id NOT IN (?)', group.students.map(&:id))
+      un_students.each do |student|
+        unassigned_students << student unless unassigned_students.include?(student)
+      end
+    end
+    unassigned_students
+  end
+
 
 end

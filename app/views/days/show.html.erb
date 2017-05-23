@@ -1,78 +1,85 @@
 <h1>Date: <%= @day.name.strftime('%a, %e %b %Y') %></h1>
 
-<div class="row">
-  <div class="col s8">
+<div class="day">
+  <div class="row">
+    <div class="col s8">
 
-    <% @day.groups.order(:start_time).group_by(&:start_time).each do |time, daygroups| %>
-        <h4><%= time.strftime('%I:%M') %></h4>
+      <% @day.groups.order(:start_time).group_by(&:start_time).each do |time, daygroups| %>
+          <h4><%= time.strftime('%I:%M') %></h4>
 
 
 
-        <div class="row">
-        <% daygroups.each do |daygroup| %>
-          <div class="col s12 m6">
-            <div class="card group droppable sticky-action" id="<%= daygroup.id %>" data-id="<%= daygroup.id %>">
-              <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4"><%= daygroup.activities.map(&:name).to_sentence %><i class="material-icons right">more_vert</i></span>
-                <p>Facilitator: <%= daygroup.users.map(&:name).to_sentence %> </p>
-                <p>Location: <%= daygroup.campus_area.name %></p>
-                <p><%= daygroup.start_time.strftime('%I:%M') %><%= " - #{daygroup.end_time.strftime('%I:%M')}" if daygroup.end_time.present? %></p>
-                  <ul class="collapsible" data-collapsible="accordion">
-                    <li>
-                      <div class="collapsible-header"><i class="material-icons">filter_drama</i><%= daygroup.students.count %> Students</div>
-                      <div class="collapsible-body">
-                        <span>
-                          <ul class="collection ">
-                            <% daygroup.students.order(:last_name).each do |student| %>
-                              <li class="collection-item removestudent" id="<%= student.id %>" data-id="<%= student.id %>"><%= student.name %></li>
-                            <% end %>
-                          </ul>
-                        </span>
-                      </div>
-                    </li>
-                  </ul>
-                    <p><%= '<div class="chip">Review Session</div>'.html_safe if daygroup.review %></p>
-                    <p><%= '<div class="chip">1 on 1 Session</div>'.html_safe if daygroup.one_on_one %></p>
-                    <p><%= '<div class="chip">AI Session</div>'.html_safe if daygroup.ai_session %></p>
-                    <p><%= '<div class="chip">Whole Group Session</div>'.html_safe if daygroup.add_all_students %></p>
-              </div>
-              <div class="card-action">
-                  <%= link_to "Edit Group", edit_cohort_day_group_path(@cohort.id, @day.id, daygroup.id) %>
-                  <%= link_to "Duplicate Group", copy_group_path(@cohort.id, @day.id, daygroup.id), method: :post, data: { confirm: 'Are you sure you want to make a copy?' } %>
-              </div>
-              <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4"><%= daygroup.name %><i class="material-icons right">close</i></span>
-                <p><%= daygroup.activities.map(&:description).to_sentence %></p>
+          <div class="row">
+          <% daygroups.each do |daygroup| %>
+            <div class="col s12 m6">
+              <div class="card group sticky-action">
+                <div class="card-content droppable" id="<%= daygroup.id %>" data-id="<%= daygroup.id %>">
+                  <% unless daygroup.activities.count > 1 %>
+                    <span class="card-title activator grey-text text-darken-4"><%= daygroup.activities.first.name %><i class="material-icons right">more_vert</i></span>
+                  <% else %>
+                    <span class="card-title activator grey-text text-darken-4"><%= daygroup.activities.count %> Activities<i class="material-icons right">more_vert</i></span>
+                  <% end %>
+                  <p>Facilitator: <%= daygroup.users.map(&:name).to_sentence %> </p>
+                  <p>Location: <%= daygroup.campus_area.name %></p>
+                  <p><%= daygroup.start_time.strftime('%I:%M') %><%= " - #{daygroup.end_time.strftime('%I:%M')}" if daygroup.end_time.present? %></p>
+                    <ul class="collapsible" data-collapsible="accordion">
+                      <li>
+                        <div class="collapsible-header"><i class="material-icons">filter_drama</i><%= daygroup.students.count %> Students</div>
+                        <div class="collapsible-body">
+                          <span>
+                            <ul class="collection">
+                              <% daygroup.students.order(:last_name).each do |student| %>
+                                <li class="collection-item removestudent" id="<%= student.id %>" data-id="<%= student.id %>"><%= student.name %></li>
+                              <% end %>
+                            </ul>
+                          </span>
+                        </div>
+                      </li>
+                    </ul>
+                      <p><%= '<div class="chip">Review Session</div>'.html_safe if daygroup.review %></p>
+                      <p><%= '<div class="chip">1 on 1 Session</div>'.html_safe if daygroup.one_on_one %></p>
+                      <p><%= '<div class="chip">AI Session</div>'.html_safe if daygroup.ai_session %></p>
+                      <p><%= '<div class="chip">Whole Group Session</div>'.html_safe if daygroup.add_all_students %></p>
+                </div>
+                <div class="card-action">
+                    <%= link_to "Edit Group", edit_cohort_day_group_path(@cohort.id, @day.id, daygroup.id) %>
+                    <%= link_to "Duplicate Group", copy_group_path(@cohort.id, @day.id, daygroup.id), method: :post, data: { confirm: 'Are you sure you want to make a copy?' } %>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4"><%= daygroup.name %><i class="material-icons right">close</i></span>
+                  <p><%= daygroup.activities.map(&:description).to_sentence %></p>
+                </div>
               </div>
             </div>
+          <% end %>
           </div>
         <% end %>
-        </div>
-      <% end %>
 
 
-      <ul class="collapsible" data-collapsible="accordion">
-        <li>
-          <div class="collapsible-header"><i class="material-icons">filter_drama</i>Create New Group</div>
-          <div class="collapsible-body"><span>
-            <%= render partial: '/groups/form', locals: {cohort: @cohort, day: @day, group: @day.groups.build} %>
-          </span></div>
-        </li>
-      </ul>
-  </div>
-
-
-    <div class="col s4 students">
-      <ul class="collection with-header">
-        <li class="collection-header"><h4><%= @day.cohort.start_date.strftime('%B %Y') %> Cohort - <%= @day.cohort.students.count %> Students</h4></li>
-        <% @day.cohort.students.order(:last_name).each do |student| %>
-            <%= content_tag 'div', class: 'collection-item draggable', id: "#{student.id}", data: {id: "#{student.id}"} do %>
-                <li><%= student.name %></li>
-            <% end %>
-          <% end %>
-      </ul>
+        <ul class="collapsible" data-collapsible="accordion">
+          <li>
+            <div class="collapsible-header"><i class="material-icons">filter_drama</i>Create New Group</div>
+            <div class="collapsible-body"><span>
+              <%= render partial: '/groups/form', locals: {cohort: @cohort, day: @day, group: @day.groups.build} %>
+            </span></div>
+          </li>
+        </ul>
     </div>
+
+
+      <!-- <div class="col s4 students">
+        <ul class="collection with-header">
+          <li class="collection-header"><h4><%= @day.cohort.start_date.strftime('%B %Y') %> Cohort - <%= @cohort.students.count %> Students</h4></li>
+          <% @students_in_non_everyday_groups.each do |student| %>
+                <%= content_tag 'div', class: 'collection-item draggable', id: "#{student.id}", data: {id: "#{student.id}"} do %>
+                    <li><%= student.name %></li>
+                <% end %>
+            <% end %>
+        </ul>
+      </div> -->
+  </div>
 </div>
+
 
 
 <div class="row">

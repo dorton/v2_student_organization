@@ -13,6 +13,13 @@ class DaysController < ApplicationController
     @cohort = @day.cohort
     @users = @cohort.users
 
+    @non_everyday_activities = @day.activities.where(everyday: false)
+    @groups_with_non_everyday_activities = Group.joins(:activities).where('activities.id IN (?)', @non_everyday_activities.map(&:id))
+    @students_in_non_everyday_groups = @cohort.students.joins(:groups).where('groups.id NOT IN (?)', @groups_with_non_everyday_activities.map(&:id)).uniq
+
+
+
+
   end
 
 
