@@ -36,8 +36,9 @@ namespace :daily do
 
     end
     results = all_count
-    advancement_students = results.select{|k,v| v > "75"}
-    review_students = results.select{|k,v| v <= "75"}
+    advancement_students = results.select{|k,v| v.to_i > 75}
+    review_students = results.select{|k,v| v.to_i <= 75}
+
     cohort = Cohort.last
     day = cohort.days.find_or_create_by(name: Date.today)
 
