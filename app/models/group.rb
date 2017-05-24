@@ -13,8 +13,7 @@ class Group < ApplicationRecord
     clone [:student_groups, :user_groups, :group_tivities]
   end
 
-
-  def self.create_everyday_groups(day)
+  def self.create_everyday_groups(day, advancement_students, review_students)
     activities = Activity.where(everyday: true)
     activities.each do |activity|
       group = day.groups.new
@@ -22,11 +21,14 @@ class Group < ApplicationRecord
       group.campus_area = CampusArea.find_by(name: "Main Room")
       if activity.name == "Morning Announcements"
         group.start_time = "09:30AM"
-        group.end_time = "10:00AM"
+        group.end_time = "09:45AM"
         group.add_all_students = true
       elsif activity.name == "Lecture Review"
-        group.start_time = "10:00AM"
+        group.start_time = "09:45AM"
         group.end_time = "10:30AM"
+      elsif activity.name == "Daily Activities"
+        group.start_time = "09:45AM"
+        group.end_time = "12:00AM"
       elsif activity.name == "Assessed Project"
         group.start_time = "1:00PM"
         group.end_time = "1:30PM"
@@ -47,13 +49,23 @@ class Group < ApplicationRecord
         group.start_time = "4:00PM"
         group.add_all_students = true
       else
-        group.start_time = "09:30AM"
       end
       group.save
 
-      group.students << day.cohort.students unless activity.name == "Lecture Review"
       group.activities << activity
+      day.activities << activity
+    end
 
+    day.groups.each do |group|
+      if group.activities.include?(Activity.find_by(name: "Lecture Review"))
+        review_students.map{|k,v| k}.each do |student|
+          group.students << Student.where(first_name: student.split(' ').first).where(last_name: student.split(' ').last)
+        end
+      elsif group.activities.include?(Activity.find_by(name: "Daily Activities"))
+        advancement_students.map{|k,v| k}.each do |student|
+          group.students << Student.where(first_name: student.split(' ').first).where(last_name: student.split(' ').last)
+        end
+      end
     end
 
   end

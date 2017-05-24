@@ -41,7 +41,7 @@ class DaysController < ApplicationController
     if @day.save!
       @day.update_attributes(week_number: @day.name.cweek)
       @day.activities << Activity.where(everyday: true)
-      Group.create_everyday_groups(@day)
+      # Group.create_everyday_groups(@day)
       redirect_to @cohort, notice: 'Day Created.'
     else
       render @cohort, notice: 'oooops.'

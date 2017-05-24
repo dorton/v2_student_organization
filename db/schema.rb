@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170520041239) do
+ActiveRecord::Schema.define(version: 20170524002042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,15 @@ ActiveRecord::Schema.define(version: 20170520041239) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["city_id"], name: "index_cohorts_on_city_id", using: :btree
+  end
+
+  create_table "daily_percentages", force: :cascade do |t|
+    t.date     "date"
+    t.integer  "formal_assessment_percent"
+    t.integer  "student_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["student_id"], name: "index_daily_percentages_on_student_id", using: :btree
   end
 
   create_table "day_tivities", force: :cascade do |t|
@@ -179,6 +188,7 @@ ActiveRecord::Schema.define(version: 20170520041239) do
   add_foreign_key "activities", "groups"
   add_foreign_key "campus_areas", "cities"
   add_foreign_key "cohorts", "cities"
+  add_foreign_key "daily_percentages", "students"
   add_foreign_key "day_tivities", "activities"
   add_foreign_key "day_tivities", "days"
   add_foreign_key "days", "cities"

@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.input :name, :as=> 'string' ,:label => 'New Day', input_html: { class: 'datepicker' } %>
-    <%= f.association :activities, collection: Activity.where(everyday: false).order(:name), prompt: "Choose Activities For The Day"  %>
+    <%= f.association :activities, collection: Activity.all.order(:name), prompt: "Choose Activities For The Day"  %>
   </div>
 
   <div class="form-actions">

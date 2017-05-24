@@ -5,6 +5,7 @@ class Student < ApplicationRecord
   belongs_to :city
   has_many :groups, through: :student_groups
   has_many :student_groups, dependent: :destroy
+  has_many :daily_percentages
 
   validates :email, uniqueness: true
 
