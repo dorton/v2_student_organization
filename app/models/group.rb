@@ -26,16 +26,10 @@ class Group < ApplicationRecord
       elsif activity.name == "Lecture Review"
         group.start_time = "09:45AM"
         group.end_time = "10:30AM"
-      elsif activity.name == "Daily Activities"
-        group.start_time = "09:45AM"
-        group.end_time = "12:00AM"
+        group.remediation = true
       elsif activity.name == "Assessed Project"
         group.start_time = "1:00PM"
         group.end_time = "1:30PM"
-        group.add_all_students = true
-      elsif activity.name == "Assessed Project - Checkpoint"
-        group.start_time = "1:30PM"
-        group.end_time = "2:00PM"
         group.add_all_students = true
       elsif activity.name == "Assessed Project - Review"
         group.start_time = "1:30PM"
@@ -45,9 +39,6 @@ class Group < ApplicationRecord
         group.start_time = "2:00PM"
         group.end_time = "4:00PM"
         group.add_all_students = true
-      elsif activity.name == "AI Assessments and Check In"
-        group.start_time = "4:00PM"
-        group.add_all_students = true
       else
       end
       group.save
@@ -55,13 +46,16 @@ class Group < ApplicationRecord
       group.activities << activity
       day.activities << activity
     end
+    todays_activities = Activity.where(date: Date.today)
+
+    self.today_groups(day, todays_activities)
 
     day.groups.each do |group|
-      if group.activities.include?(Activity.find_by(name: "Lecture Review"))
+      if group.remediation?
         review_students.map{|k,v| k}.each do |student|
           group.students << Student.where(first_name: student.split(' ').first).where(last_name: student.split(' ').last)
         end
-      elsif group.activities.include?(Activity.find_by(name: "Daily Activities"))
+      elsif group.advancement?
         advancement_students.map{|k,v| k}.each do |student|
           group.students << Student.where(first_name: student.split(' ').first).where(last_name: student.split(' ').last)
         end
@@ -69,5 +63,26 @@ class Group < ApplicationRecord
     end
 
   end
+
+  def self.today_groups(day, todays_activities)
+    ['advancement', 'remediation'].each do |group_type|
+      group = day.groups.new
+      group.campus_area = CampusArea.find_by(name: ["Jolly JavaScripts", "Rooooobie Room"].sample)
+      group.advancement = true if group_type == 'advancement'
+      group.remediation = true if group_type == 'remediation'
+      group.start_time = "09:45AM" if group_type == 'advancement'
+      group.start_time = "10:30AM" if group_type == 'remediation'
+      group.end_time = "12:00PM"
+      todays_activities.each do |a|
+        group.activities << a
+      end
+      group.save
+    end
+  end
+
+
+
+
+
 
 end

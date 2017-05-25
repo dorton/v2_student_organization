@@ -10,10 +10,10 @@
   </thead>
 
   <tbody>
-    <% @activities.order(:name).each do |activity| %>
+    <% @activities.order(:date).each do |activity| %>
       <tr>
         <td><%= activity.name %></td>
-        <td><%= activity.description %></td>
+        <td><%= activity.date.strftime('%m/%d/%Y') if activity.date? %></td>
         <td><%= activity.everyday %></td>
         <td><%= link_to 'Show', activity %></td>
         <td><%= link_to 'Edit', edit_activity_path(activity) %></td>

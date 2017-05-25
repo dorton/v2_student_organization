@@ -50,7 +50,7 @@
   <div class="col s12 m6 l6">
   <ul class="collection with-header">
     <li class="collection-header"><h4>Cohort Staff</h4></li>
-    <% @cohort.users.order(:last_name).each do |user| %>
+    <% @cohort.users.order(:last_name).uniq.each do |user| %>
       <li class="collection-item"><%= user.name %></li>
     <% end %>
   </ul>

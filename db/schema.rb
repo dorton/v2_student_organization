@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170524002042) do
+ActiveRecord::Schema.define(version: 20170525010030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20170524002042) do
     t.integer  "day_id"
     t.integer  "group_id"
     t.boolean  "everyday",    default: false, null: false
+    t.date     "date"
     t.index ["day_id"], name: "index_activities_on_day_id", using: :btree
     t.index ["group_id"], name: "index_activities_on_group_id", using: :btree
   end
