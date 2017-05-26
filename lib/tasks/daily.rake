@@ -47,4 +47,40 @@ namespace :daily do
 
   end
 
+    task attendance: :environment do
+
+      users = User.all.map { |a| a.name }
+      students = Student.all.map { |e| e.name }
+      assignments = students.shuffle.in_groups(users.count, false)
+      array = users.zip(assignments)
+      h = {}
+      array.each do |a|
+        h[a[0]] = a[1]
+      end
+
+
+      token = ENV['slack_token']
+
+      h.each do |k, v|
+
+        u = User.find_by(last_name: k.split(' ').last)
+
+        channel = "@#{u.slack_username}"
+
+        text = "Oh, hi #{u.first_name}. \n\nHere's your attendance check for #{Date.today.strftime('%a, %e %b %Y')}: \n\n#{v.join("\n")}\n\nYou can mark your peeps here, https://newline.theironyard.com/admin/cohorts/8/attendance"
+
+
+        Slack.configure do |config|
+          config.token = token
+        end
+
+        client = Slack::Web::Client.new
+        client.auth_test
+
+        client.chat_postMessage(channel: channel, text: text, as_user: true) if u.slack_username.present?
+
+      end
+
+    end
+
 end
