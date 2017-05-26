@@ -45,3 +45,8 @@ require 'pry'
     results.select{|card| card[:type] == "Activity"}.each do |k,v|
       puts [k, v].join
     end
+
+    lessons = results.select{|card| card[:type] == "Lesson"}
+    lessons.each do |lesson|
+      puts "#{lesson[:type]} => #{lesson[:name]}"
+    end
