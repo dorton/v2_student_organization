@@ -1,21 +1,27 @@
 Front End Lessons:
 
-
+Week 1(ish)
 Lesson => Basic Computer and Terminal Skills
 Lesson => HTML Overview and Basic Elements
 Lesson => HTML Structure and Layout
 Lesson => Applying Style with CSS
 Lesson => CSS Layout & Fonts
 Lesson => CSS Layout and Flexbox
+
+Week 2(ish)
 Lesson => Responsive Web Design
 Lesson => Creating HTML Forms and Inspecting Your Code
 Lesson => Version Control with Git
 Lesson => Using Git Remotely with a Team
 Lesson => Getting Started with JavaScript
+
+Week 3(ish)
 Lesson => Functions and Complex Expressions
 Lesson => Creating Arrays and Loops
 Lesson => Building Objects and Maintaining Proper Scope
 Lesson => Algorithms and Data Modeling
+
+Week 4(ish)
 Lesson => Using JavaScript to Modify HTML
 Lesson => Working with Remote Data
 Lesson => Unit Testing to Help Prevent Errors
