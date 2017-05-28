@@ -1,6 +1,5 @@
-class Api::StudentsController < ApplicationController
-  skip_before_action :authenticate_user!
-  # before_action :authenticate_student!
+class Api::StudentsController < API::ApiController
+  before_action :doorkeeper_authorize!
 
   before_action :set_student, only: [:show, :update, :destroy]
 
@@ -9,7 +8,7 @@ class Api::StudentsController < ApplicationController
   end
 
   def index
-    @students = Student.all
+    @students = Student.where(id: current_student.id)
   end
 
   def show

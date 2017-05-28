@@ -31,11 +31,14 @@ def create_cities
     end
 
     25.times do
-      student = Student.create(last_name: Faker::Name.last_name, first_name: Faker::Name.first_name, specialization_id: Specialization.all.sample.id, email: Faker::Internet.email)
+      student = Student.create(last_name: Faker::Name.last_name, first_name: Faker::Name.first_name, specialization_id: Specialization.all.sample.id, email: Faker::Internet.email, password: Faker::Internet.password(8))
       city.students << student
       cohort.students << student
     end
 
+    stume = Student.create(last_name: "Tron", first_name: "Dork", email: "1@1.com", password: "12345678")
+    city.students << stume
+    cohort.students << stume
   end
 end
 

@@ -63,6 +63,8 @@ GEM
       warden (~> 1.2.3)
     domain_name (0.5.20160826)
       unf (>= 0.0.5, < 1.0.0)
+    doorkeeper (4.2.6)
+      railties (>= 4.2)
     dynamic_form (1.1.4)
     erubis (2.7.0)
     eventmachine (1.2.3)
@@ -268,9 +270,11 @@ PLATFORMS
 
 DEPENDENCIES
   amoeba
+  bcrypt (~> 3.1.7)
   byebug
   coffee-rails (~> 4.2)
   devise
+  doorkeeper
   dynamic_form
   eventmachine
   faker
