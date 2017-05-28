@@ -86,7 +86,7 @@ class DaysController < ApplicationController
     @students = @day.cohort.students.where('slack_username is not null')
     @groups = @day.groups
 
-    @students.where(slack_username: "dorton").each do |student|
+    @students.all.each do |student|
 
       TheScheduler.send_slack(student, @groups, @day)
 
