@@ -1,5 +1,6 @@
 class Student < ApplicationRecord
   require 'csv'
+  has_secure_password
 
   belongs_to :cohort
   belongs_to :city
@@ -7,7 +8,7 @@ class Student < ApplicationRecord
   has_many :student_groups, dependent: :destroy
   has_many :daily_percentages
 
-  validates :email, uniqueness: true
+  validates :email, uniqueness: true, presence: true
 
 
   def self.import(file, cohort, city)
